@@ -1,0 +1,91 @@
+!DOCTYPE html>
+<html lang="en">
+   <head>     
+ <title>Search Data From Database</title>
+     <style> 
+     body{
+ background-color: grey;
+     } 
+    table,th,td{
+    	border: 2px solid black;
+    	width: 600px;
+    	background-color: lightgreen; 
+ 	
+    } 
+
+    .btn{
+    	width: 10px;
+    	height: 5px;
+    	font-size: 22px;
+    	padding: 0px;
+    	
+    }
+    
+    
+      
+      
+    </style>
+   </head>
+   <body>
+   	<center>
+        <h1>M.E.S.HIGHER SECONDARY ZUARINAGAR</h1>
+        <h2>Auomobile Results</h2>
+        <div class = "container">
+       <form action ="" method ="POST" >
+          <input type ="text" name = "id" placeholder = "Enter student ID"/>
+          <input type = "submit" name="search" value ="SEARCH BY ID">
+</form>
+<table>
+           <tr>
+               <th>Name</th>
+               <th>CS</th>
+               <th>Grade_CS</th>
+               <th>GFC</th>
+               <th>Grade_GFC</th>
+               <th>Total</th>
+
+
+</tr><br>
+
+
+
+<?php
+
+
+// Create a connection
+
+$connection = mysqli_connect("localhost","root","");
+$db = mysqli_select_db($connection,'auto');
+
+if(isset($_POST['search']))
+{
+    $id = $_POST['id'];
+
+   
+    $query = "SELECT * FROM aetxi where id = '$id' ";
+    $query_run = mysqli_query($connection,$query);
+    
+    
+       while($row = mysqli_fetch_array($query_run)) 
+       { 
+       ?> 
+ 
+      <tr>
+ 
+    <td style="text-align:center"><?php echo $row['Name']; ?></td> 
+    <td style="text-align:center"><?php echo $row['CS']; ?></td> 
+    <td style="text-align:center"><?php echo $row['Grade_CS']; ?></td> 
+    <td style="text-align:center"><?php echo $row['GFC']; ?></td> 
+    <td style="text-align:center"><?php echo $row['Grade_GFC']; ?></td>
+    <td style="text-align:center"><?php echo $row['Total']; ?></td> 
+     
+    </tr> 
+ <?php 
+           } 
+ }
+      ?> 
+      </table>
+ </div>
+ </center>
+ </body>
+ </html>
